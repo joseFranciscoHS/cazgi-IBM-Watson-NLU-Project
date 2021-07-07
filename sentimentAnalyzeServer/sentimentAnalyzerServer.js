@@ -108,7 +108,7 @@ app.get("/text/emotion", (req, res) => {
 
     naturalLanguageUnderstanding.analyze(analyzeParams)
         .then(analysisResults => {
-            let ent = analysisResults.result.entities;
+            let ent = analysisResults.result.keywords;
             res.send(JSON.stringify(ent.length < 1 ? [] : ent[0].emotion, null, 2));
         })
         .catch(err => {
@@ -137,7 +137,7 @@ app.get("/text/sentiment", (req, res) => {
 
     naturalLanguageUnderstanding.analyze(analyzeParams)
         .then(analysisResults => {
-            let kw = analysisResults.result.entities;
+            let kw = analysisResults.result.keywords;
             txt = (kw.length < 1 ? txt : kw[0].sentiment.label);
             return res.send(txt);
         })
